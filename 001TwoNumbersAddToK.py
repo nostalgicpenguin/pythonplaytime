@@ -1,3 +1,5 @@
+# Daily Coding Problem 001:
+#
 # Given a list of numbers and a number k, return whether any two numbers
 # from the list add up to k.
 # For example, given [10, 15, 3, 7] and k of 17, return True since 10 + 7 is 17
@@ -16,17 +18,17 @@ def two_numbers_sum_to_k(numbers, k):
         print("{}: Not enough numbers!".format(sys._getframe().f_code.co_name))
         return False
 
-    # Loop over numbers
+    # Loop through each index in numbers
     for i in range(len(numbers) - 1):
 
-        # x is the entry at index i, and we'll test all the other entries
-        # against it
+        # x is the entry at index i, and calculate the sum of it each of the
+        # other entries
         x = numbers[i]
 
         # Loop over numbers again, skipping the entry at index i
         for y in numbers[:i] + numbers[i + 1:]:
 
-            # Test the sum of x and y and return True if equal to k
+            # y is the number to sum with x, test if the sum is equal to k
             if (x + y) == k:
                 print('{}: {} and {} sum to {}'.format(
                     sys._getframe().f_code.co_name,
@@ -57,7 +59,11 @@ def two_numbers_sum_to_k_single_pass(numbers, k):
         print("{}: Not enough numbers!".format(sys._getframe().f_code.co_name))
         return False
 
+    # Loop through each index in numbers
     for i in range(len(numbers) - 1):
+
+        # Form a new list excluding the entry at index i and see if there are
+        # any entries equal to k-numbers[i]
         if((numbers[:i] + numbers[i + 1:]).count(k - numbers[i])):
             print('{}: {} and {} sum to {}'.format(
                 sys._getframe().f_code.co_name,
