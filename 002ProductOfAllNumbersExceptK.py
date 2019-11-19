@@ -49,3 +49,6 @@ class SimpleTest(unittest.TestCase):
         self.assertEqual(product_of_array([1, 2, 3, 4, 5]),
                          [120, 60, 40, 30, 24]
                          )
+
+if __name__ == "__main__":
+    unittest.main()  # run all tests
