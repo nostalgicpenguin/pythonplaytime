@@ -3,6 +3,7 @@
 # a Monte Carlo method.
 #
 # Hint: The basic equation of a circle is x2 + y2 = r2.
+import math
 
 
 def get_next_x_y():
@@ -15,17 +16,16 @@ def get_next_x_y():
         step=0.25: 0.125, 0.375, 0.625, 0.875
         etc
     """
-    iteration = 1
+    iteration = 0
 
     while True:
         step = 1 / pow(2, iteration)
-        start = step/2
-        end = 1 - start
-        y = start
+        start = step / 2
 
-        while y <= end:
+        y = start
+        while y < 1:
             x = start
-            while x <= end:
+            while x < 1:
                 yield iteration, x, y
                 x += step
             y += step
@@ -36,22 +36,27 @@ def get_next_x_y():
 def is_inside_circle_of_radius(x, y, r):
     return x*x + y*y <= r*r
 
+MAX_ITERATIONS = 10
 
 def estimate_pi():
     in_circle = 0
     count = 0
-    iterations = 0
     gen = get_next_x_y()
 
-    while iterations < 12:
-        iterations, x, y = next(gen)
-        count += 1
+    pi_est = 0;
 
+    while True:
+        iterations, x, y = next(gen)
+        if iterations >= MAX_ITERATIONS:
+            break
+
+        count += 1
         if is_inside_circle_of_radius(x-0.5, y-0.5, 0.5):
             in_circle += 1
 
-    pi_est = 4 * in_circle / count
-    print("PI = {}, counter = {}".format(pi_est, count))
+    new_pi_est = 4 * in_circle / count
+    print("PI = {}, counter = {}".format(new_pi_est, count))
+
 
 
 if __name__ == "__main__":
